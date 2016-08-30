@@ -15,5 +15,15 @@
 
     <!-- A Spring Integration adapter that routes messages sent to the helloWorldChannel to the bean named "helloServiceImpl"'s hello() method -->
     <service-activator input-channel="helloWorldChannel" ref="helloServiceImpl" method="hello" />
+    
+    
+     <!-- A Spring Integration channel for use by our gateway -->
+    <channel id="helloWorldWithReplyChannel" />
+
+    <!-- A Spring Integration adapter that routes messages sent to the helloWorldChannel to the bean named "helloServiceImpl"'s getHelloMessage() method -->
+    <service-activator input-channel="helloWorldWithReplyChannel" ref="helloServiceImpl" method="getHelloMessage" />
+
+    <!-- Define a gateway that we can use to capture a return value -->
+    <gateway id="helloWorldGateway" service-interface="org.nirmal.learning.springintegration.service.HelloService" default-request-channel="helloWorldWithReplyChannel" />	
 
 </beans:beans>

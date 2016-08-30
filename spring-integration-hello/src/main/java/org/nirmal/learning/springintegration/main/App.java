@@ -11,6 +11,7 @@ public class App {
 		GreeterService greeterService = applicationContext.getBean("greeterServiceImpl", GreeterService.class);
 
 		greeterService.greet("Spring Integration!");
+		greeterService.greet2( "Spring Integration (with response)!");
 
 		applicationContext.close();
 	}
